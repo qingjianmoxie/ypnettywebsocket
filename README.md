@@ -29,4 +29,18 @@ Eg：channel_global@#@1   这个channel_global表示全局管道；1就表示用
 }
 ```
 
+noticeId：消息ID。
+
+noticeLabel：消息主题。
+
+publisher：发送者。
+
+receiverChannelIds：接收者。
+
+groupType：管道名称。
+
+message：消息内容。
+
+totalReceivers：总共有多少个接收者。
+
 ### Kafka
