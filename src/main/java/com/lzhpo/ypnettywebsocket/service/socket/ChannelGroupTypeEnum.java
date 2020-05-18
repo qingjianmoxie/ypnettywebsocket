@@ -1,9 +1,10 @@
 package com.lzhpo.ypnettywebsocket.service.socket;
 
 /**
+ * TODO：可将管道的值和名称使用 key-value 形式存在数据库中
+ *
  * @author lzhpo
  */
-
 public enum ChannelGroupTypeEnum {
 
     /**

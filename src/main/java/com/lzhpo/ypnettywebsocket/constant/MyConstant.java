@@ -29,4 +29,9 @@ public class MyConstant {
 
     /** 记录连接失败的客户端信息到Redis的前缀 */
     public static final String FAIL_CLIENT = "failClient-";
+
+    /** 客户端连接的时候需要传入的参数【客户端需要连接的管道名称】 */
+    public static final String CHANNEL_GROUP = "channelGroup";
+    /** 客户端连接的时候需要传入的参数【客户端自定义的唯一的ID】 */
+    public static final String CLIENT_ID = "clientId";
 }

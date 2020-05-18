@@ -14,6 +14,14 @@
     <name>ypnettywebsocket</name>
     <description>Demo project for Spring Boot</description>
 
+    <developers>
+        <developer>
+            <name>lzhpo</name>
+            <email>lzhpo@qq.com</email>
+            <url>https://www.lzhpo.com</url>
+        </developer>
+    </developers>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>
