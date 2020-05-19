@@ -20,6 +20,7 @@ import java.util.Optional;
  * @author lzhpo
  */
 @Service
+@Slf4j
 public class KafkaConsumerImpl implements KafkaConsumer {
 
     @Autowired
@@ -30,12 +31,17 @@ public class KafkaConsumerImpl implements KafkaConsumer {
      *
      * <p>
      * 如果有值，就执行通知，使用观察者模式。
+     * <p>
+     * 可以同时订阅多主题，只需按数组格式即可，也就是用“,”隔开。
+     *
+     * 注意：集群模式和单机模式是不一样的，集群模式需要一个监听工厂（containerFactory = "kafkaListenerContainerFactory"）。
      *
      * @param record
      */
-    @KafkaListener(topics = {"kafka-topic-notice"})
+    @KafkaListener(topics = {"kafka-topic-notice"}, containerFactory = "kafkaListenerContainerFactory")
     @Override
     public void receive(ConsumerRecord<String, String> record, Acknowledgment ack) {
+        log.info("监听到名称为kafka-topic-notice的topic有消息！{}", record);
         Optional<String> kafkaMsg = Optional.ofNullable(record.value());
         kafkaMsg.ifPresent(s -> {
             KafkaMsg msg = (KafkaMsg) JsonUtils.toObj(s, KafkaMsg.class);

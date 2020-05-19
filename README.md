@@ -15,7 +15,7 @@ ws://127.0.0.1:8003/notice
 Eg：channel_global@#@1   这个channel_global表示全局管道；1就表示用户ID，也就是接收者；@#@是分割符号
 
 ### 发送通知数据
-访问：http://localhost:8000/publish
+访问：http://localhost:9000/publish
 请求体：
 ```json
 {

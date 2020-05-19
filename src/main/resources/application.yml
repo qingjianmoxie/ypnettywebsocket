@@ -1,9 +1,9 @@
 server:
-  port: 8000
+  port: 9000
 spring:
   # Kafka配置
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrapServers: 192.168.10.27:9092,192.168.10.214:9092,192.168.10.194:9092
     # 生产者配置
     producer:
       #procedure要求leader在考虑完成请求之前收到的确认数，用于控制发送记录在服务端的持久化，其值可以为如下：
@@ -20,15 +20,18 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
     # 消费者配置
     consumer:
-      group-id: 1
-      # 是否自动提交offset
+      # 消费组(必须设置，且是唯一的，默认好像有一个，但是还是需要自己手动设置消费组，不然消费者就会无法消费)
+      group-id: consumer_01_group
+      # 是否自动提交offset(建议：手动提交offset)
       enable-auto-commit: false
-    # 手动提交offset
+    # 监听器
     listener:
       #侦听器的AckMode,参见https://docs.spring.io/spring-kafka/reference/htmlsingle/#committing-offsets
       #当enable.auto.commit的值设置为false时，该值会生效；为true时不会生效
       # MANUAL：手动调用Acknowledgment.acknowledge()后，并且处理完poll的这批数据后提交。
       ack-mode: manual
+      # 多线程监听
+      concurrency: 3
   # Redis配置
   redis:
     host: localhost
@@ -49,3 +52,7 @@ kafka:
   consumer:
     topic:
       notice: kafka-topic-notice
+# zookeeper配置
+zookeeper:
+  address: 192.168.10.27:2181,192.168.10.214:2181,192.168.10.194:2181
+  timeout: 4000

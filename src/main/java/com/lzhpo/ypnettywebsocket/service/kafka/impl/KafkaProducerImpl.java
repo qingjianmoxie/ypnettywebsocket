@@ -56,11 +56,7 @@ public class KafkaProducerImpl implements KafkaProducer {
         ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, JsonUtils.toJson(kafkaMsg));
         // ListenableFutureTask的异步回调
         future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
-            /**
-             * 失败回调
-             *
-             * @param ex
-             */
+            // 失败回调
             @Override
             public void onFailure(Throwable ex) {
                 while (retry.get() != MAX_RETRY_TIMES) {
@@ -68,12 +64,7 @@ public class KafkaProducerImpl implements KafkaProducer {
                 }
                 log.error("Kafka send failure!", ex);
             }
-
-            /**
-             * 成功回调
-             *
-             * @param result
-             */
+            // 成功回调
             @Override
             public void onSuccess(SendResult<String, String> result) {
                 log.info("Kafka send success!{}", result);
