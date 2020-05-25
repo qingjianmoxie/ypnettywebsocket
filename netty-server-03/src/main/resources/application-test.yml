@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9003
 spring:
   # Kafka配置
   kafka:
@@ -21,7 +21,7 @@ spring:
     # 消费者配置
     consumer:
       # 消费组(必须设置，且是唯一的，默认好像有一个，但是还是需要自己手动设置消费组，不然消费者就会无法消费)
-      group-id: netty-server-consumer-01-group
+      group-id: netty-server-consumer-03-group
       # 是否自动提交offset(建议：手动提交offset)
       enable-auto-commit: false
     # 监听器

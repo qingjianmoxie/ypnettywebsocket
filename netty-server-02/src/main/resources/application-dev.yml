@@ -3,7 +3,7 @@ server:
 spring:
   # Kafka配置
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrapServers: 192.168.10.128:9092,192.168.10.129:9092,192.168.10.130:9092
     # 生产者配置
     producer:
       #procedure要求leader在考虑完成请求之前收到的确认数，用于控制发送记录在服务端的持久化，其值可以为如下：
@@ -21,7 +21,7 @@ spring:
     # 消费者配置
     consumer:
       # 消费组(必须设置，且是唯一的，默认好像有一个，但是还是需要自己手动设置消费组，不然消费者就会无法消费)
-      group-id: netty-server-consumer-01-group
+      group-id: consumer_01_group
       # 是否自动提交offset(建议：手动提交offset)
       enable-auto-commit: false
     # 监听器
@@ -34,7 +34,7 @@ spring:
       concurrency: 3
   # Redis配置
   redis:
-    host: localhost
+    host: 47.96.253.123
     port: 6379
     password: 123456
     lettuce:
@@ -49,5 +49,5 @@ spring:
         max-wait: -1ms
 # zookeeper配置
 zookeeper:
-  address: localhost:2181
+  address: 192.168.10.128:2181,192.168.10.129:2181,192.168.10.130:2181
   timeout: 4000

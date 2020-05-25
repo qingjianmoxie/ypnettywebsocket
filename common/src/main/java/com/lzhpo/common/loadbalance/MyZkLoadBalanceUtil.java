@@ -22,7 +22,6 @@ public class MyZkLoadBalanceUtil {
      * @return 返回服务器IP和端口
      */
     public static String roundRobin(List<String> serverList) {
-        System.out.println("roundRobinCountNum: " +roundRobinCountNum);
         String server = null;
         if (roundRobinCountNum >= serverList.size()) {
             // 计数器大于服务器列表个数，计数器就重新归零

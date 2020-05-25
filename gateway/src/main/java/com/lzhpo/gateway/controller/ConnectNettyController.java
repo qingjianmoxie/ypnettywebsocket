@@ -1,9 +1,11 @@
 package com.lzhpo.gateway.controller;
 
 import com.lzhpo.common.constant.MyConstant;
+import com.lzhpo.common.entity.ConnectNettyServer;
 import com.lzhpo.common.loadbalance.MyZkLoadBalanceUtil;
 import com.lzhpo.common.vo.ResultData;
 import com.lzhpo.gateway.zk.ZookeeperUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.KeeperException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import java.util.List;
 /**
  * @author lzhpo
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/connect")
 public class ConnectNettyController {
@@ -31,11 +34,12 @@ public class ConnectNettyController {
      * @throws InterruptedException
      */
     @GetMapping("getNettyServer")
-    public ResultData<String> getServer() throws KeeperException, InterruptedException {
+    public ResultData<ConnectNettyServer> getServer() throws KeeperException, InterruptedException {
         List<String> nettyServerList = zookeeperUtil.getChildrenArrayData(MyConstant.NETTY_SERVER, null);
-        System.out.println("nettyServerList：" +nettyServerList);
         String nettyServer = MyZkLoadBalanceUtil.roundRobin(nettyServerList);
-        System.out.println("nettyServer：" +nettyServer);
-        return new ResultData<>(nettyServer);
+        ConnectNettyServer connectNettyServer = new ConnectNettyServer();
+        connectNettyServer.setNettyServerUrl(nettyServer);
+        log.info("客户端请求的Netty服务器地址 [{}]", connectNettyServer);
+        return new ResultData<>(connectNettyServer);
     }
 }
